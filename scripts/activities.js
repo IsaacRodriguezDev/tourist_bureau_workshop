@@ -102,5 +102,36 @@ let activities = [
 ];
 
 window.onload = function(){
+    // called the categoriesDropDown function to run when window loads
+    catagoriesDropdown()
+    
+   
+
+}
+// created a function that appends the categories into the dropdown
+function catagoriesDropdown(){
+// called the select and stored it into a variable called dropDownCategory
+let dropDownCategory = document.querySelector('#selectCategory')
+// created a variable for the categories length 
+let categoriesLength = categories.length
+// created a variable for creating the option element
+let defaultOption = document.createElement('option')
+// assigned the defaultOtion.textContent with a string called Select an Activity 
+defaultOption.textContent ='Select an Activity'
+// gave the defaultOtion a value of emptt string 
+defaultOption.value=''
+// appended the defaultOption to the dropdown
+dropDownCategory.appendChild(defaultOption)
+// created a for loop to append each item int he category variable and then appended them to the dropdown
+for(let i = 0; i<categoriesLength;i++){
+// created a variable for creating the option element and assigned it to a varibale called newOptions
+    let newOptions = document.createElement('option')
+// assigned the newOptions.textContent with whatever is in the categories current index 
+    newOptions.textContent =  categories[i]
+// assigned the newOptions.value with whatever is in the categories current index 
+    newOptions.value = categories[i]
+// appended the newOptions to the dropdown
+ dropDownCategory.appendChild(newOptions)
+}
 
 }
