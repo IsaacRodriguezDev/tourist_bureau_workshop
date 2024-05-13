@@ -120,61 +120,45 @@ let activities = [
 ];
 
 window.onload = function () {
-  // called the categoriesDropDown function to run when window loads
-  catagoriesDropdown();
-
+  // called the categoriesDropDown function to run when window loads so it can display all the drop down categories 
+  categoriesDropdown();
   let selectCategory = document.querySelector("#selectCategory");
-  selectCategory.addEventListener("change", catagorychange);
+  selectCategory.addEventListener("change", categorychange);
 };
 // created a function that appends the categories into the dropdown
-function catagoriesDropdown() {
-  // called the category select and stored it into a variable called dropDownCategory
+function categoriesDropdown() {
   let dropDownCategory = document.querySelector("#selectCategory");
-  //   called the activities select and stored it into a variable called dropDownActivities
   let dropDownActivities = document.querySelector("#selectActivities");
-  // created a variable for the categories length
   let categoriesLength = categories.length;
   // created a variable for creating the option element
   let defaultOption = document.createElement("option");
-  // assigned the defaultOtion.textContent with a string called Select an Category
   defaultOption.textContent = "Select a Category";
-  // gave the defaultOtion a value of emptt string
   defaultOption.value = "";
-  // appended the defaultOption to the dropdown
+  // append the defaultOption to the dropdown
   dropDownCategory.appendChild(defaultOption);
   // created a for loop to append each item int he category variable and then appended them to the dropdown
   for (let i = 0; i < categoriesLength; i++) {
-    // created a variable for creating the option element and assigned it to a varibale called newOptions
     let newOptions = document.createElement("option");
-    // assigned the newOptions.textContent with whatever is in the categories current index
     newOptions.textContent = categories[i];
-    // assigned the newOptions.value with whatever is in the categories current index
     newOptions.value = categories[i];
-    // appended the newOptions to the dropdown
     dropDownCategory.appendChild(newOptions);
     // made the dropdown for activities hidden
     dropDownActivities.style.display = "none";
   }
 }
 // created a function when user picks a catagory it will show the activities for each one
-function catagorychange() {
-  // called the category select and stored it into a variable called dropDownCategory
+function categorychange() {
   let dropDownCategory = document.querySelector("#selectCategory");
-  //   called the activities select and stored it into a variable called dropDownActivities
   let dropDownActivities = document.querySelector("#selectActivities");
-  // created a variable for creating the option element and assigned it to a varibale called selectActivityOption
   let selectActivityOption = document.createElement("option");
-  // created a variable for the length of activities
   let activitiesLength = activities.length;
-  // created a variable called getIndex that get's the current selected dropdownCategory index and subtracts it's value by 1
   let getIndex = dropDownCategory.selectedIndex - 1;
   // sets the length of the activities select element to 0 so we don't get extra activities besides the only ones that are supposed to be there
   dropDownActivities.length = 0;
-// made the dropDownActivities visible using style.display = 'inline' whenever picks a category
+// made the dropDownActivities visible using style.display = 'inline' so they display next to eachother whenever picks a category 
   dropDownActivities.style.display = "inline";
 // made an if statemenet with a condition to run if the category drop down selected index is -1
   if (getIndex === -1) {
-    // hide the drop down for activities if condition is true
     dropDownActivities.style.display = "none";
   }
 // made selectActivityOption.textContent take in string Select an Activity
@@ -183,17 +167,12 @@ function catagorychange() {
   selectActivityOption.value = "";
 //   append the selectActivityOption to the dropdown for activities 
   dropDownActivities.appendChild(selectActivityOption);
-//   created a for loop to loop through the array of objects 
+//   created a for loop to loop through the activities 
   for (let i = 0; i < activitiesLength; i++) {
-    // created a create element for options and gave it to activityOptions
     let activityOptions = document.createElement("option");
-    // made an if statement that takes in a condition if the activities index category equals the exact same as the category dropdown value
     if (activities[i].category === dropDownCategory.value) {
-    // made activityOptions.textContent take in what is the current index name of the activities
       activityOptions.textContent = activities[i].name;
-    //  made activityOptions.value take in what is the current index id of the activities
       activityOptions.value = activities[i].id;
-    // append the activityOptions to the dropdown for activities 
       dropDownActivities.appendChild(activityOptions);
     }
   }
