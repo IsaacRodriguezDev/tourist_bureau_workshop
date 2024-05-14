@@ -120,9 +120,11 @@ let activities = [
 ];
 
 window.onload = function () {
-  // called the categoriesDropDown function to run when window loads so it can display all the drop down categories 
+  // called the categoriesDropDown function to run when window loads so it can display all the drop down categories
   categoriesDropdown();
   let selectCategory = document.querySelector("#selectCategory");
+  let selectAvtivity = document.querySelector("#selectActivities");
+  selectAvtivity.addEventListener("change", displayActivities);
   selectCategory.addEventListener("change", categorychange);
 };
 // created a function that appends the categories into the dropdown
@@ -155,19 +157,19 @@ function categorychange() {
   let getIndex = dropDownCategory.selectedIndex - 1;
   // sets the length of the activities select element to 0 so we don't get extra activities besides the only ones that are supposed to be there
   dropDownActivities.length = 0;
-// made the dropDownActivities visible using style.display = 'inline' so they display next to eachother whenever picks a category 
+  // made the dropDownActivities visible using style.display = 'inline' so they display next to eachother whenever picks a category
   dropDownActivities.style.display = "inline";
-// made an if statemenet with a condition to run if the category drop down selected index is -1
+  // made an if statemenet with a condition to run if the category drop down selected index is -1
   if (getIndex === -1) {
     dropDownActivities.style.display = "none";
   }
-// made selectActivityOption.textContent take in string Select an Activity
+  // made selectActivityOption.textContent take in string Select an Activity
   selectActivityOption.textContent = "Select an Activity";
-//   gave selectActivityOption.value and empty string
+  //   gave selectActivityOption.value and empty string
   selectActivityOption.value = "";
-//   append the selectActivityOption to the dropdown for activities 
+  //   append the selectActivityOption to the dropdown for activities
   dropDownActivities.appendChild(selectActivityOption);
-//   created a for loop to loop through the activities 
+  //   created a for loop to loop through the activities
   for (let i = 0; i < activitiesLength; i++) {
     let activityOptions = document.createElement("option");
     if (activities[i].category === dropDownCategory.value) {
@@ -175,5 +177,26 @@ function categorychange() {
       activityOptions.value = activities[i].id;
       dropDownActivities.appendChild(activityOptions);
     }
+  }
+}
+// created a function to display the description of whichever activity is being chosen 
+function displayActivities() {
+  let dropDownActivities = document.querySelector("#selectActivities");
+  let dropDownCategory = document.querySelector("#selectCategory");
+  let results = document.querySelector("#results");
+  let activitiesLength = activities.length;
+  let selectedActivityIndex = dropDownActivities.selectedIndex - 1;
+// created a matching variable to store all the activities into an array to choose whichever selected index is being chosen and outputting the description
+  let matching = [];
+  for (let i = 0; i < activitiesLength; i++) {
+    if (activities[i].category === dropDownCategory.value) {
+      matching.push(activities[i]);
+    }
+  }
+  // made a if statement to hide the results innerHtml whenever user selects Select an Activity dropdown option
+  if (selectedActivityIndex === -1) {
+    results.innerHTML = "";
+  } else {
+    results.innerHTML = matching[selectedActivityIndex].description;
   }
 }
