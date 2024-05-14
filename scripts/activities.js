@@ -197,6 +197,13 @@ function displayActivities() {
   if (selectedActivityIndex === -1) {
     results.innerHTML = "";
   } else {
-    results.innerHTML = matching[selectedActivityIndex].description;
+    let selectedActivity = matching[selectedActivityIndex]
+    results.innerHTML = `
+    <div> The Name: <b>${selectedActivity.name}</b></div>
+    <div> The Id: <b>${selectedActivity.id}</b></div>
+    <div> The Description: <b>${selectedActivity.description}</b></div>
+    <div> The Location: <b>${selectedActivity.location}</b></div>
+    <div> The Price: <b>$${selectedActivity.price}</b></div>
+    `
   }
 }
